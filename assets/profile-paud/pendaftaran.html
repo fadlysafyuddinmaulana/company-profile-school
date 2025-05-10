@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>PAUD JAMI ASSOFA</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		/>
+
+		<!-- PDF.js viewer CSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf_viewer.min.css"
+		/>
+
+		<style>
+			/* PDF Viewer Container */
+			.pdf-viewer-container {
+				margin: 20px auto;
+				width: 100%;
+				max-width: 900px;
+				border: 1px solid #ddd;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			}
+
+			/* PDF Viewer Toolbar */
+			.pdf-toolbar {
+				display: flex;
+				align-items: center;
+				background-color: #333;
+				color: white;
+				padding: 8px 15px;
+				font-size: 14px;
+			}
+
+			.pdf-toolbar button {
+				background: none;
+				border: none;
+				color: white;
+				cursor: pointer;
+				margin: 0 3px;
+				padding: 5px;
+			}
+
+			.pdf-toolbar button:hover {
+				background-color: rgba(255, 255, 255, 0.2);
+				border-radius: 3px;
+			}
+
+			.pdf-toolbar .spacer {
+				flex-grow: 1;
+			}
+
+			.pdf-toolbar .page-info {
+				margin: 0 15px;
+				display: flex;
+				align-items: center;
+			}
+
+			.pdf-toolbar .page-info input {
+				width: 40px;
+				text-align: center;
+				margin: 0 5px;
+				background: rgba(255, 255, 255, 0.2);
+				border: none;
+				color: white;
+				padding: 3px;
+			}
+
+			.pdf-toolbar .zoom-controls {
+				display: flex;
+				align-items: center;
+				margin: 0 15px;
+			}
+
+			.zoom-value {
+				margin: 0 10px;
+				min-width: 45px;
+				text-align: center;
+			}
+
+			/* PDF Content Area */
+			.pdf-content {
+				height: 700px;
+				overflow: auto;
+				background-color: #525659;
+				display: flex;
+				justify-content: center;
+				padding: 20px 0;
+			}
+
+			#pdf-canvas {
+				background-color: white;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+			}
+
+			/* Loading indicator */
+			.loading {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				color: white;
+				font-size: 16px;
+				background: rgba(0, 0, 0, 0.7);
+				padding: 10px 20px;
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- header -->
+		<div class="medsos">
+			<div class="container">
+				<ul>
+					<li><a href="#">WEBSITE PROFILE SEKOLAH</a></li>
+				</ul>
+			</div>
+		</div>
+		<header>
+			<div class="container">
+				<h1><a href="index.html">PAUD JAMI ASSOFA</a></h1>
+				<ul>
+					<li><a href="index.html">BERANDA</a></li>
+					<li><a href="program.html">PROGAM</a></li>
+					<li><a href="berita.html">BERITA</a></li>
+					<li class="active"><a href="pendaftaran.html">PENDAFTARAN</a></li>
+					<li><a href="kontak.html">KONTAK</a></li>
+				</ul>
+			</div>
+		</header>
+
+		<!--label-->
+		<section class="label">
+			<div class="container">
+				<p>Informasi Pendaftaran/Syarat&Ketentuan</p>
+			</div>
+		</section>
+
+		<!-- pendaftaran -->
+		<section class="pendaftaran">
+			<div class="container">
+				<h3>PENDAFTARAN</h3>
+				<h3>Informasi Pendaftaran</h3>
+				<p align="left">Syarat dan Ketentuan :</p>
+				<p>1. Mengisi formulir pendaftaran</p>
+				<p>2. Melampirkan fotokopi akte kelahiran</p>
+				<p>3. Melampirkan fotokopi kartu keluarga</p>
+
+				<h3>Formulir Pendaftaran</h3>
+
+				<!-- PDF Viewer Container -->
+				<div class="pdf-viewer-container">
+					<!-- PDF Toolbar -->
+					<div class="pdf-toolbar">
+						<button id="toggle-sidebar" title="Toggle Sidebar">
+							<i class="fas fa-bars"></i>
+						</button>
+
+						<div class="page-info">
+							<button id="prev-page" title="Previous Page">
+								<i class="fas fa-chevron-left"></i>
+							</button>
+
+							<input type="text" id="current-page" value="1" /> /
+							<span id="total-pages">1</span>
+
+							<button id="next-page" title="Next Page">
+								<i class="fas fa-chevron-right"></i>
+							</button>
+						</div>
+
+						<div class="zoom-controls">
+							<button id="zoom-out" title="Zoom Out">
+								<i class="fas fa-search-minus"></i>
+							</button>
+
+							<span class="zoom-value">100%</span>
+
+							<button id="zoom-in" title="Zoom In">
+								<i class="fas fa-search-plus"></i>
+							</button>
+						</div>
+
+						<div class="spacer"></div>
+
+						<button id="download-pdf" title="Download">
+							<i class="fas fa-download"></i>
+						</button>
+
+						<button id="print-pdf" title="Print">
+							<i class="fas fa-print"></i>
+						</button>
+
+						<button id="fullscreen" title="Fullscreen">
+							<i class="fas fa-expand"></i>
+						</button>
+					</div>
+
+					<!-- PDF Content Area -->
+					<div class="pdf-content" id="pdf-container">
+						<canvas id="pdf-canvas"></canvas>
+						<div id="loading" class="loading" style="display: none">Loading PDF...</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- footer -->
+		<footer>
+			<div class="container"></div>
+			<small>Copyright&copy;2025-PAUD Jami Assofa.All Rights Reserved.</small>
+		</footer>
+
+		<!-- PDF.js scripts -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+		<script>
+			// The workerSrc property needs to be specified
+			pdfjsLib.GlobalWorkerOptions.workerSrc =
+				'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+			// PDF file path
+			const url = 'formulir-pendaftaran.pdf';
+
+			let pdfDoc = null,
+				pageNum = 1,
+				pageRendering = false,
+				pageNumPending = null,
+				scale = 1.0,
+				canvas = document.getElementById('pdf-canvas'),
+				ctx = canvas.getContext('2d'),
+				container = document.getElementById('pdf-container');
+
+			document.getElementById('loading').style.display = 'block';
+
+			/**
+			 * Render the page
+			 */
+			function renderPage(num) {
+				pageRendering = true;
+
+				// Update the current page input
+				document.getElementById('current-page').value = num;
+
+				// Get page
+				pdfDoc.getPage(num).then(function (page) {
+					const viewport = page.getViewport({ scale: scale });
+					canvas.height = viewport.height;
+					canvas.width = viewport.width;
+
+					// Render PDF page into canvas context
+					const renderContext = {
+						canvasContext: ctx,
+						viewport: viewport
+					};
+
+					const renderTask = page.render(renderContext);
+
+					// Wait for rendering to finish
+					renderTask.promise.then(function () {
+						pageRendering = false;
+
+						if (pageNumPending !== null) {
+							// New page rendering is pending
+							renderPage(pageNumPending);
+							pageNumPending = null;
+						}
+					});
+				});
+			}
+
+			/**
+			 * If another page rendering in progress, wait until the rendering is
+			 * finished. Otherwise, execute rendering immediately.
+			 */
+			function queueRenderPage(num) {
+				if (pageRendering) {
+					pageNumPending = num;
+				} else {
+					renderPage(num);
+				}
+			}
+
+			/**
+			 * Display previous page
+			 */
+			function onPrevPage() {
+				if (pageNum <= 1) {
+					return;
+				}
+				pageNum--;
+				queueRenderPage(pageNum);
+			}
+			document.getElementById('prev-page').addEventListener('click', onPrevPage);
+
+			/**
+			 * Display next page
+			 */
+			function onNextPage() {
+				if (pageNum >= pdfDoc.numPages) {
+					return;
+				}
+				pageNum++;
+				queueRenderPage(pageNum);
+			}
+			document.getElementById('next-page').addEventListener('click', onNextPage);
+
+			/**
+			 * Zoom in
+			 */
+			function zoomIn() {
+				scale += 0.25;
+				queueRenderPage(pageNum);
+				updateZoomDisplay();
+			}
+			document.getElementById('zoom-in').addEventListener('click', zoomIn);
+
+			/**
+			 * Zoom out
+			 */
+			function zoomOut() {
+				if (scale <= 0.25) return;
+				scale -= 0.25;
+				queueRenderPage(pageNum);
+				updateZoomDisplay();
+			}
+			document.getElementById('zoom-out').addEventListener('click', zoomOut);
+
+			/**
+			 * Update zoom percentage display
+			 */
+			function updateZoomDisplay() {
+				document.querySelector('.zoom-value').textContent = Math.round(scale * 100) + '%';
+			}
+
+			/**
+			 * Handle page input
+			 */
+			document.getElementById('current-page').addEventListener('change', function () {
+				const pageNumber = parseInt(this.value);
+
+				if (pageNumber >= 1 && pageNumber <= pdfDoc.numPages) {
+					pageNum = pageNumber;
+					queueRenderPage(pageNum);
+				} else {
+					this.value = pageNum;
+				}
+			});
+
+			/**
+			 * Download PDF
+			 */
+			document.getElementById('download-pdf').addEventListener('click', function () {
+				// Create a temporary link
+				const link = document.createElement('a');
+				link.href = url;
+				link.download = url.split('/').pop();
+				link.target = '_blank';
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			});
+
+			/**
+			 * Print PDF
+			 */
+			document.getElementById('print-pdf').addEventListener('click', function () {
+				const printWindow = window.open(url);
+				printWindow.addEventListener('load', function () {
+					printWindow.print();
+				});
+			});
+
+			/**
+			 * Toggle fullscreen
+			 */
+			document.getElementById('fullscreen').addEventListener('click', function () {
+				if (!document.fullscreenElement) {
+					document
+						.querySelector('.pdf-viewer-container')
+						.requestFullscreen()
+						.catch((err) => {
+							console.error(
+								`Error attempting to enable full-screen mode: ${err.message}`
+							);
+						});
+				} else {
+					document.exitFullscreen();
+				}
+			});
+
+			/**
+			 * Toggle sidebar (placeholder functionality)
+			 */
+			document.getElementById('toggle-sidebar').addEventListener('click', function () {
+				alert('Sidebar functionality would be implemented here.');
+			});
+
+			/**
+			 * Load the PDF
+			 */
+			pdfjsLib
+				.getDocument(url)
+				.promise.then(function (pdfDoc_) {
+					pdfDoc = pdfDoc_;
+					document.getElementById('total-pages').textContent = pdfDoc.numPages;
+					document.getElementById('loading').style.display = 'none';
+
+					// Initial render of the first page
+					renderPage(pageNum);
+				})
+				.catch(function (error) {
+					// Display error
+					const loadingDiv = document.getElementById('loading');
+					loadingDiv.textContent = 'Error loading PDF: ' + error.message;
+					loadingDiv.style.display = 'block';
+					console.error(error);
+				});
+		</script>
+	</body>
+</html>
