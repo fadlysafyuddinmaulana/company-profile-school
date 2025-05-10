@@ -100,7 +100,6 @@ class CMS extends CI_Controller
 	public function insert_berita()
 	{
 		$judul_berita = $this->input->post('judul_berita');
-		$author = $this->input->post('author');
 		$isi_berita = $this->input->post('isi_berita');
 		$kategori_berita = $this->input->post('kategori_berita');
 		$ringkasan = $this->input->post('ringkasan Berita');
@@ -130,44 +129,35 @@ class CMS extends CI_Controller
 			$this->load->library('upload');
 			$this->upload->initialize($config);
 
-			if (!empty($_FILES['foto']['name'])) {
-				if ($this->upload->do_upload('foto')) {
-					$foto = $this->upload->data();
-					$data = [
-						'nama_petugas' => $nama,
-						'jk' => $jk,
-						'foto_petugas' => $foto['file_name'],
-						'active' => '1',
-					];
-					$this->session->set_flashdata('message', 'Petugas berhasil di tambah!');
-					$this->M_SQL->insert_data($data, 'petugas');
-					redirect('petugas');
-				} else {
-					$this->session->set_flashdata(
-						'message_error',
-						'Gagal file foto yang dimasukkan tidak sesuai dengan kriteria!',
-					);
-					redirect('tambah-Petugas');
-				}
-			} else {
+			if ($this->upload->do_upload('foto')) {
+				$foto = $this->upload->data();
 				$data = [
-					'nama_petugas' => $nama,
-					'jk' => $jk,
-					'foto_petugas' => $jk,
-					'active' => '1',
+					'nama_petugas' => $judul_berita,
+					'author' => 'admin',
+					'isi_berita' => $isi_berita,
+					'kategori_berita' => $kategori_berita,
+					'ringkasan' => $ringkasan,
+					'foto_petugas' => $foto['file_name'],
 				];
 				$this->session->set_flashdata('message', 'Petugas berhasil di tambah!');
-				$this->M_SQL->insert_data($data, 'petugas');
-				redirect('petugas');
+				$this->M_SQL->insert_data($data, 'tb_berita');
+				redirect('dashboard');
+			} else {
+				$this->session->set_flashdata(
+					'message_error',
+					'Gagal file foto yang dimasukkan tidak sesuai dengan kriteria!',
+				);
+				redirect('tambah-Petugas');
 			}
 		}
 	}
 
 	public function update_berita($idp)
 	{
-		$idp = $this->input->post('idp');
-		$nama = $this->input->post('nama');
-		$jk = $this->input->post('jk');
+		$judul_berita = $this->input->post('judul_berita');
+		$isi_berita = $this->input->post('isi_berita');
+		$kategori_berita = $this->input->post('kategori_berita');
+		$ringkasan = $this->input->post('ringkasan Berita');
 
 		$path = './assets/server-image/dokumen-profile-petugas/';
 
@@ -175,9 +165,11 @@ class CMS extends CI_Controller
 			if ($this->upload->do_upload('foto')) {
 				$foto = $this->upload->data();
 				$data = [
-					'id_petugas' => $idp,
-					'nama_petugas' => $nama,
-					'jk' => $jk,
+					'nama_petugas' => $judul_berita,
+					'author' => 'admin',
+					'isi_berita' => $isi_berita,
+					'kategori_berita' => $kategori_berita,
+					'ringkasan' => $ringkasan,
 					'foto_petugas' => $foto['file_name'],
 				];
 				@unlink($path . $this->input->post('filelama'));
@@ -194,10 +186,12 @@ class CMS extends CI_Controller
 			}
 		} else {
 			$data = [
-				'id_petugas' => $idp,
-				'nama_petugas' => $nama,
-				'jk' => $jk,
-				'foto_petugas' => $jk,
+				'nama_petugas' => $judul_berita,
+				'author' => 'admin',
+				'isi_berita' => $isi_berita,
+				'kategori_berita' => $kategori_berita,
+				'ringkasan' => $ringkasan,
+				'foto_petugas' => $foto['file_name'],
 			];
 			$this->session->set_flashdata('message', 'Petugas berhasil di ubah!');
 			$this->M_SQL->update_data($where, $data, 'petugas');
@@ -220,9 +214,11 @@ class CMS extends CI_Controller
 			if ($this->upload->do_upload('foto')) {
 				$foto = $this->upload->data();
 				$data = [
-					'id_petugas' => $idp,
-					'nama_petugas' => $nama,
-					'jk' => $jk,
+					'nama_petugas' => $judul_berita,
+					'author' => 'admin',
+					'isi_berita' => $isi_berita,
+					'kategori_berita' => $kategori_berita,
+					'ringkasan' => $ringkasan,
 					'foto_petugas' => $foto['file_name'],
 				];
 				@unlink($path . $this->input->post('filelama'));
@@ -239,10 +235,12 @@ class CMS extends CI_Controller
 			}
 		} else {
 			$data = [
-				'id_petugas' => $idp,
-				'nama_petugas' => $nama,
-				'jk' => $jk,
-				'foto_petugas' => $jk,
+				'nama_petugas' => $judul_berita,
+				'author' => 'admin',
+				'isi_berita' => $isi_berita,
+				'kategori_berita' => $kategori_berita,
+				'ringkasan' => $ringkasan,
+				'foto_petugas' => $foto['file_name'],
 			];
 			$this->session->set_flashdata('message', 'Petugas berhasil di ubah!');
 			$this->M_SQL->update_data($where, $data, 'petugas');
@@ -266,103 +264,5 @@ class CMS extends CI_Controller
 		$this->session->set_flashdata('message', 'Foto berhasil di hapus!');
 		$this->M_SQL->update_data($where, $data, 'siswa');
 		redirect('siswa');
-	}
-
-	public function add_userworker($idptgs)
-	{
-		$idp = $this->input->post('idp');
-		$username = $this->input->post('username');
-		$password = md5($this->input->post('password'));
-
-		$this->form_validation->set_rules(
-			'username',
-			'Username',
-			'required|is_unique[petugas.username]',
-			[
-				'required' => 'username harus di sertakan!',
-				'is_unique' => 'Username ini sudah dipakai!',
-			],
-		);
-
-		$this->form_validation->set_rules('password', 'Passwrod', 'required', [
-			'required' => 'Password harus di sertakan!',
-		]);
-
-		if ($this->form_validation->run() == false) {
-			$user = $this->session->userdata('server_library');
-
-			$data['title'] = 'Perpustakaan A';
-			$data['aktif'] = 'petugas';
-			$data['modal_show'] = "$('#add-modal-worker').modal('show');";
-
-			if ($user['role'] == 'admin') {
-				$data['tree_active'] = 'petugas';
-			}
-
-			$where = ['id_petugas' => $idptgs];
-
-			$data['petugas'] = $this->M_SQL->get_data($where, 'petugas')->row();
-
-			$this->load->view('layout/header', $data);
-			$this->load->view('layout/navbar', $data);
-			$this->load->view('Petugas-Page/detail_petugas', $data);
-			$this->load->view('layout/footer', $data);
-		} else {
-			$where = [
-				'id_petugas' => $idp,
-			];
-
-			$data = [
-				'username' => $username,
-				'password' => $password,
-				'active' => 2,
-			];
-
-			$this->session->set_flashdata('message', 'akun berhasil di ubah!');
-			$this->M_SQL->update_data($where, $data, 'petugas');
-			redirect('detail-petugas' . '/' . $idp);
-		}
-	}
-
-	public function update_userworker($idptgs)
-	{
-		$idp = $this->input->post('idp');
-		$username = $this->input->post('username');
-		$password_hidden = $this->input->post('password');
-		$password = md5($this->input->post('password'));
-
-		$where = [
-			'id_petugas' => $idp,
-		];
-
-		if ($password_hidden == '') {
-			$data = [
-				'id_petugas' => $idp,
-				'username' => $username,
-			];
-			$this->M_SQL->update_data($where, $data, 'petugas');
-			redirect('detail-petugas' . '/' . $idp);
-		} else {
-			$data = [
-				'id_petugas' => $idp,
-				'username' => $username,
-				'password' => $password,
-			];
-			$this->session->set_flashdata('message', 'Akun berhasil di ubah!');
-			$this->M_SQL->update_data($where, $data, 'petugas');
-			redirect('detail-petugas' . '/' . $idp);
-		}
-	}
-
-	public function del_petugas($id, $foto_petugas)
-	{
-		$path = './assets/server-image/dokumen-profile-petugas/';
-		@unlink($path . $foto_petugas);
-
-		$where = ['id_petugas' => $id];
-
-		$this->session->set_flashdata('message', 'Petugas berhasil di tambah!');
-		$this->M_SQL->delete_data($where, 'petugas');
-		redirect('petugas');
 	}
 }

@@ -4,68 +4,44 @@ class Auth extends CI_Controller
 {
     public function index()
     {
-        $user = $this->session->userdata('server_library');
+        $data['title'] = 'Perpustakaan Karya Ilmu';
 
-        if (empty($user)) {
-            $data['title']      = 'Perpustakaan Karya Ilmu';
-
-            $this->load->view('layout/header_login', $data);
-            $this->load->view('Starter-page/login_admin', $data);
-            $this->load->view('layout/footer_login', $data);
-        } else {
-            redirect('dashboard');
-        }
+        $this->load->view('layout/header_login', $data);
+        $this->load->view('Starter-page/login_admin', $data);
+        $this->load->view('layout/footer_login', $data);
     }
 
     public function authentication_admin()
     {
-        $username      = $this->input->post('username');
-        $password      = $this->input->post('password');
+        // Get user input
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
 
-        $this->form_validation->set_rules(
-            'username',
-            'username',
-            'required|min_length[2]',
-            [
-                'required' => 'Username wajib di sertakan!'
-            ]
-        );
+        // Static credentials
+        $valid_username = 'admin';
+        $valid_password = '12345';
 
-        $this->form_validation->set_rules(
-            'password',
-            'password',
-            'required',
-            [
-                'required' => 'Password wajib di sertakan!'
-            ]
-        );
+        // Check credentials (simple comparison for static login)
+        if ($username === $valid_username && $password === $valid_password) {
+            // Create session data
+            $session['id_petugas']      = '1';
+            $session['nama_petugas']    = 'Administrator';
+            $session['username']        = $username;
+            $session['password']        = md5($password); // Store hashed password in session
+            $session['foto_petugas']    = 'default.jpg';
+            $session['jk']              = 'L';
+            $session['role']            = 'petugas';
+            $session['is_logged_in']    = TRUE;
 
-        if ($this->form_validation->run() == FALSE) {
-            $user = $this->session->userdata('server_paud');
+            // Set session data
+            $this->session->set_userdata('server_library', $session);
 
-            if (empty($user)) {
-                $data['title']      = 'Perpustakaan Karya Ilmu';
-
-                $this->load->view('layout/header_login', $data);
-                $this->load->view('Starter-page/login_admin', $data);
-                $this->load->view('layout/footer_login', $data);
-            } elseif ($user['role'] == 'petugas') {
-                redirect('dashboard');
-            } else {
-                redirect('dashboard');
-            }
+            // Redirect to dashboard
+            redirect('dashboard');
         } else {
-            if ($username === 'admin' && $password === 'admin') {
-                $session = [
-                    'username' => 'admin',
-                ];
-
-                $this->session->set_userdata('server_paud', $session);
-                redirect('Dashboard');
-            } else {
-                $this->session->set_flashdata('message_login', 'Silahkan Cek username atau password anda!');
-                redirect('auth');
-            }
+            // Login failed
+            $this->session->set_flashdata('message_login', 'Silahkan Cek username atau password anda!');
+            redirect('auth');
         }
     }
 

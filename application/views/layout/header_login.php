@@ -2,94 +2,89 @@
 <html lang="id">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Pendaftaran Online</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Using jsDelivr CDN instead of raw GitHub URL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wahyuumoko/web-pendaftaran-rs-online@main/pages/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - FINDxDataTrace</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/dist/css/adminlte.min.css">
 
-    <!-- Fallback inline CSS in case the external CSS fails to load -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            /* Full viewport height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main-content {
-            width: 100%;
-            max-width: 500px;
-            /* Control the width of the card */
-            padding: 20px;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .container-a {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
-
-        .description {
-            margin-bottom: 20px;
-            color: #666;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .required {
-            color: red;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .submit-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            width: 100%;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .submit-btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
+
+<style>
+    body {
+        background-color: #121212;
+        color: white;
+        font-family: 'Chakra Petch', sans-serif;
+    }
+
+    header {
+        background-color: #4e4e4e;
+        padding: 10px 0;
+        position: relative;
+    }
+
+    .header-content {
+        position: relative;
+        text-align: center;
+    }
+
+    .header-content h1 {
+        margin: 0;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    /* .container {
+            display: flex;
+        } */
+
+    /* .wrapper {
+            width: 50%;
+        } */
+
+    button {
+        padding: 5px 10px;
+        font-family: 'Chakra Petch', sans-serif;
+        border: none;
+        border-radius: 5px;
+        background-color: #00faff;
+        color: #121212;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #007f9a;
+    }
+
+    /* Style untuk tombol logout */
+    .logout-button {
+        position: absolute;
+        right: 20px;
+        /* Jarak dari tepi kanan */
+        top: 50%;
+        transform: translateY(-50%);
+        /* Agar tombol vertikal sejajar tengah */
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .logout-button:hover {
+        background-color: #cc0000;
+    }
+</style>
 
 <body>
