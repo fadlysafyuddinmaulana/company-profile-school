@@ -12,9 +12,13 @@
   	<div class="container">
   		<h1><a href="index.html">PAUD JAMI ASSOFA</a></h1>
   		<ul>
-  			<li><a href="wa.me/62">Berita</a></li>
-  			<li><a href="wa.me/62">Galeri</a></li>
-  			<li><a href="<?= base_url() ?>auth">Logout</a></li>
+  			<li class="<?php if ($active == 'berita') {
+								echo 'active';
+							} ?>"><a style="color: black;" href="<?= base_url() ?>Berita">Berita</a></li>
+  			<li class="<?php if ($active == 'galeri') {
+								echo 'active';
+							} ?>><a style=" color: black;" href="<?= base_url() ?>Berita">Galeri</a></li>
+  			<li><a style=" color: black;" href="<?= base_url() ?>logout">Logout</a></li>
   		</ul>
   	</div>
   </header>

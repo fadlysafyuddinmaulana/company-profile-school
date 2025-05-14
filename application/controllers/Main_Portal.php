@@ -4,7 +4,7 @@ class Main_Portal extends CI_Controller
 {
 	public function index()
 	{
-		$data['title'] = 'Perpustakaan A';
+		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'beranda';
 
 		$this->load->view('layout/header', $data);
@@ -15,7 +15,7 @@ class Main_Portal extends CI_Controller
 
 	public function program()
 	{
-		$data['title'] = 'Perpustakaan A';
+		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'program';
 
 		$this->load->view('layout/header', $data);
@@ -25,7 +25,7 @@ class Main_Portal extends CI_Controller
 	}
 	public function news()
 	{
-		$data['title'] = 'Perpustakaan A';
+		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'berita';
 
 		$this->load->view('layout/header', $data);
@@ -35,7 +35,7 @@ class Main_Portal extends CI_Controller
 	}
 	public function form_student()
 	{
-		$data['title'] = 'Perpustakaan A';
+		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'pendaftaran';
 
 		$this->load->view('layout/header', $data);

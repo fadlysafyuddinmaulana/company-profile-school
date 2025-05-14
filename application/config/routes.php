@@ -54,7 +54,18 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
 
 $route['program'] = 'Main_Portal/program';
-$route['news'] = 'Main_Portal/news';
 $route['pendaftaran'] = 'Main_Portal/form_student';
+
+$route['news'] = 'Main_Portal/news';
+$route['add-news'] = 'Berita/add_Content_Page';
+$route['insert-news'] = 'Berita/insert_berita';
+$route['update-news/(:any)'] = 'Berita/update_berita/$1';
+$route['edit-news/(:any)'] = 'Berita/edit_news/$1';
+$route['delete-news/(:any)'] = 'Berita/del_news/$1';
+
+$route['Gallery'] = 'Main_Portal/Foto';
+$route['add-Gallery'] = 'Gallery/add_Galerry';
+$route['edit-Gallery/(:any)'] = 'Gallery/edit_Galerry/$1';
+$route['delete-Gallery/(:any)'] = 'Gallery/del_Galerry/$1';
 
 $route['authentication_admin'] = 'auth/authentication_admin';

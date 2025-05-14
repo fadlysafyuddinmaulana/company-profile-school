@@ -4,7 +4,7 @@ class Auth extends CI_Controller
 {
     public function index()
     {
-        $data['title'] = 'Perpustakaan Karya Ilmu';
+        $data['title'] = 'PAUD JAMI ASSOFA';
 
         $this->load->view('layout/header_login', $data);
         $this->load->view('Starter-page/login_admin', $data);
@@ -24,14 +24,7 @@ class Auth extends CI_Controller
         // Check credentials (simple comparison for static login)
         if ($username === $valid_username && $password === $valid_password) {
             // Create session data
-            $session['id_petugas']      = '1';
-            $session['nama_petugas']    = 'Administrator';
-            $session['username']        = $username;
-            $session['password']        = md5($password); // Store hashed password in session
-            $session['foto_petugas']    = 'default.jpg';
-            $session['jk']              = 'L';
-            $session['role']            = 'petugas';
-            $session['is_logged_in']    = TRUE;
+            $session['Username']    = 'Administrator';
 
             // Set session data
             $this->session->set_userdata('server_library', $session);

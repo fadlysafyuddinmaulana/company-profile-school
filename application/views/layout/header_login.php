@@ -2,89 +2,129 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - FINDxDataTrace</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../assets/AdminLTE-3.2.0/dist/css/adminlte.min.css">
+    <meta charset="utf-8" />
+    <title>Form Berita</title>
 
-</head>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-<style>
-    body {
-        background-color: #121212;
-        color: white;
-        font-family: 'Chakra Petch', sans-serif;
-    }
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wahyuumoko/web-pendaftaran-rs-online@main/pages/style.css">
 
-    header {
-        background-color: #4e4e4e;
-        padding: 10px 0;
-        position: relative;
-    }
+    <!-- Include Summernote CSS/JS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" rel="stylesheet">
 
-    .header-content {
-        position: relative;
-        text-align: center;
-    }
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css" />
 
-    .header-content h1 {
-        margin: 0;
-    }
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-    h1 {
-        margin: 0;
-    }
-
-    /* .container {
+    <!-- Inline Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
             display: flex;
-        } */
+            justify-content: center;
+            align-items: center;
+        }
 
-    /* .wrapper {
-            width: 50%;
-        } */
+        .main-content {
+            width: 100%;
+            max-width: 1000px;
+            padding: 20px;
+        }
 
-    button {
-        padding: 5px 10px;
-        font-family: 'Chakra Petch', sans-serif;
-        border: none;
-        border-radius: 5px;
-        background-color: #00faff;
-        color: #121212;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    button:hover {
-        background-color: #007f9a;
-    }
+        .container-a {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
 
-    /* Style untuk tombol logout */
-    .logout-button {
-        position: absolute;
-        right: 20px;
-        /* Jarak dari tepi kanan */
-        top: 50%;
-        transform: translateY(-50%);
-        /* Agar tombol vertikal sejajar tengah */
-        background-color: #ff4d4d;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+        .description {
+            margin-bottom: 20px;
+            color: #666;
+            text-align: center;
+        }
 
-    .logout-button:hover {
-        background-color: #cc0000;
-    }
-</style>
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .required {
+            color: red;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Tambahan CSS untuk Summernote */
+        .note-editor.note-frame {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: none;
+            font-size: 14px;
+        }
+
+        .note-editing-area .note-editable {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .note-editor .note-toolbar .btn {
+            font-size: 12px !important;
+            padding: 4px 6px !important;
+            line-height: 1.2 !important;
+        }
+
+        .note-editor .note-toolbar {
+            padding: 4px 6px;
+        }
+    </style>
+</head>
 
 <body>
