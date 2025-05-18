@@ -23,16 +23,19 @@ class Main_Portal extends CI_Controller
 		$this->load->view('Main-Page/program', $data);
 		$this->load->view('layout/footer', $data);
 	}
+
 	public function news()
 	{
 		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'berita';
+		$data['berita'] = $this->M_SQL->data_berita()->result_array();
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/navbar', $data);
 		$this->load->view('Main-Page/news', $data);
 		$this->load->view('layout/footer', $data);
 	}
+
 	public function form_student()
 	{
 		$data['title'] = 'PAUD JAMI ASSOFA';
@@ -41,6 +44,17 @@ class Main_Portal extends CI_Controller
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/navbar', $data);
 		$this->load->view('Main-Page/form_student', $data);
+		$this->load->view('layout/footer', $data);
+	}
+
+	public function content_news()
+	{
+		$data['title'] = 'PAUD JAMI ASSOFA';
+		$data['active'] = 'berita';
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('layout/navbar', $data);
+		$this->load->view('Main-Page/content-news', $data);
 		$this->load->view('layout/footer', $data);
 	}
 }

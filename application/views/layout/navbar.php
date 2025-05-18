@@ -20,7 +20,7 @@
 								echo 'active';
 							} ?>"><a href="<?= base_url() ?>program">Program</a>
   			</li>
-  			<li class="<?php if ($active == 'berita') {
+  			<li class="<?php if ($active == 'Gallery') {
 								echo 'active';
 							} ?>"><a href="<?= base_url() ?>news">Gallery</a>
   			</li>

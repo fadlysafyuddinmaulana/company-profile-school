@@ -18,9 +18,6 @@
                     </thead>
                     <tbody>
                         <?php
-
-
-
                         $no = 1;
 
                         foreach ($berita as $key => $value): ?>

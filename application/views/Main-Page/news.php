@@ -1,94 +1,26 @@
-<!-- berita -->
-<section class="berita">
-  <h3>BERITA</h3>
-  <p>Deskripsi mengenai foto,acara,kegiatan,manfaat,tanggal</p>
-  <p align="center"><img src="img/cook.JPG" width="350px height 350px"></p>
+    <section class="berita">
+      <div class="container">
+        <h3>BERITA TERBARU</h3>
+        <?php
+        $no = 1;
 
-  <!--card-->
-  <h3>
-    <p align="center">Galeri Foto</p>
-  </h3>
-  <div class="bg-card">
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
+        foreach ($berita as $key => $value): ?>
+          <!-- News Card like in the screenshot -->
+          <div class="news-card">
+            <div class="news-card-image">
+              <img src="<?= base_url() ?>assets/profile-paud/img/<?= $value['file_image'] ?>" alt="<?= $value['file_image'] ?>">
+            </div>
+            <div class="news-card-content">
+              <h2 class="news-card-title"><?= $value['judul'] ?></h2>
+              <div class="news-card-meta"><?= $value['created_at'] ?></div>
+              <div class="news-card-text">
+                <div class="news-card-text">
+                  <?= word_limiter($value['isi_berita'], 50) ?>
+                </div>
+              </div>
+              <a href="<?= base_url() ?>berita/detail_berita/<?= $value['judul'] ?>" class="news-card-link">Selengkapnya</a>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-          <img src="img\pemadam.jpeg">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-          <img src="img\cook.jpeg">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-    <a href="#">
-      <div class="card">
-        <div class="gambar">
-        </div>
-        <div class="des-card">
-          <h4><strong>Memasak Bersama</strong></h4>
-          <p align="left">Deskripsi</p>
-        </div>
-      </div>
-    </a>
-</section>
+    </section>

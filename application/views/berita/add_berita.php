@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="container-a">
-        <form action="<?= base_url() ?>insert-news" method="post" enctype="multipart/form-data">
+        <form method="post" action="<?= base_url() ?>insert-news" enctype="multipart/form-data">
             <h1>Login Admin</h1>
             <div id="login" class="tab-content active">
                 <p class="description">Masukan Nomor Pasien dan Tanggal Lahir</p>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label>Upload Foto <span class="required">*</span></label>
-                    <input type="file" name="foto">
+                    <input type="file" name="foto" id="foto">
                 </div>
                 <button type="submit" class="submit-btn">Login</button>
             </div>

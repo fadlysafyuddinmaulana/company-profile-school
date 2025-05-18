@@ -47,18 +47,12 @@ class Berita extends CI_Controller
 
 	public function detail_berita($idptgs)
 	{
-		$user = $this->session->userdata('server_library');
-
 		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'petugas';
 
-		if ($user['role'] == 'admin') {
-			$data['tree_active'] = 'petugas';
-		}
+		$where = ['id_berita' => $idptgs];
 
-		$where = ['id_petugas' => $idptgs];
-
-		$data['petugas'] = $this->M_SQL->get_data($where, 'petugas')->row();
+		$data['petugas'] = $this->M_SQL->get_data($where, 'tb_berita')->row();
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/navbar', $data);
@@ -75,26 +69,25 @@ class Berita extends CI_Controller
 
 		$config['upload_path'] = './assets/img/berita';
 		$config['allowed_types'] = 'png|jpeg|jpg';
-		$config['max_size'] = '5048';
+		$config['max_size'] = '10240';
 		$config['file_name'] = $_FILES['foto']['name'];
 
 		$this->load->library('upload');
 		$this->upload->initialize($config);
 
-		// if ($this->upload->do_upload('foto')) {
-		$foto = $this->upload->data();
-		$data = [
-			'judul' => $judul_berita,
-			'isi_berita' => $isi_berita,
-			'category' => $kategori_berita,
-			'file_image' => $foto['file_name'],
-		];
-		$this->M_SQL->insert_data($data, 'tb_berita');
-		redirect('dashboard');
-		// } else {
-		// redirect('add-news');
-		// }
-
+		if ($this->upload->do_upload('foto')) {
+			$foto = $this->upload->data();
+			$data = [
+				'judul' => $judul_berita,
+				'isi_berita' => $isi_berita,
+				'category' => $kategori_berita,
+				'file_image' => $foto['file_name'],
+			];
+			$this->M_SQL->insert_data($data, 'tb_berita');
+			redirect('dashboard');
+		} else {
+			redirect('dashboard');
+		}
 	}
 
 	public function update_berita($id_berita)
@@ -110,9 +103,7 @@ class Berita extends CI_Controller
 
 		$config['upload_path']      = './assets/img/berita';
 		$config['allowed_types']    = 'png|jpeg|jpg';
-		$config['maax_size']        = '5048';
-		$config['max_width']        = '540'; // pixel
-		$config['max_height']       = '720'; // pixel
+		$config['max_size']         = '10240';
 		$config['file_name']        = $_FILES['foto']['name'];
 
 		$this->load->library('upload');

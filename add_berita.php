@@ -1,185 +1,405 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $title ?></title>
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/profile-paud/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wahyuumoko/web-pendaftaran-rs-online@main/pages/style.css">
-
-    <!-- Summernote CSS (tanpa integrity agar tidak error) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" />
-
-    <!-- CodeMirror CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/monokai.min.css" />
-
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
-    <!-- Inline Styling -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main-content {
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .container-a {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
-
-        .description {
-            margin-bottom: 20px;
-            color: #666;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .required {
-            color: red;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .submit-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            width: 100%;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .submit-btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="main-content">
-        <div class="container-a">
-            <form action="<?= base_url() ?>insert-news" method="post" enctype="multipart/form-data">
-                <h1>Login Admin</h1>
-                <div id="login" class="tab-content active">
-                    <p class="description">Masukan Nomor Pasien dan Tanggal Lahir</p>
-                    <div class="form-group">
-                        <label>Judul Berita <span class="required">*</span></label>
-                        <input type="text" placeholder="Masukkan Nomor Pasien" name="judul_berita" id="judul_berita" value="test judul" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Isi Berita <span class="required">*</span></label>
-                        <textarea id="summernote" name="isi_berita" id="isi_berita">
-                            Place <em>some</em> <u>text</u> <strong>here</strong>
-                        </textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Kategori <span class="required">*</span></label>
-                        <select name="kategori_berita" id="kategori_berita" required>
-                            <option value="">-- Pilih Kategori --</option>
-                            <option value="Pendidikan">Pendidikan</option>
-                            <option value="Event" selected>Event</option>
-                            <option value="Kompetisi">Kompetisi</option>
-                            <option value="Perpustakaan">Perpustakaan</option>
-                            <option value="Pelatihan">Pelatihan</option>
-                            <option value="Beasiswa">Beasiswa</option>
-                            <option value="Prestasi">Prestasi</option>
-                            <option value="Teknologi">Teknologi</option>
-                            <option value="Inovasi">Inovasi</option>
-                            <option value="Akademik">Akademik</option>
-                            <option value="Budaya">Budaya</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Upload Foto <span class="required">*</span></label>
-                        <input type="file" name="foto" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Login</button>
-                </div>
-            </form>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        form {
+            background-color: #1e1e1e;
+            /* Latar belakang form */
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            /* Menghindari overflow */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #444;
+            /* Border input */
+            border-radius: 5px;
+            background-color: #222;
+            /* Latar belakang input */
+            color: white;
+            /* Warna teks input */
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #00faff;
+            color: #121212;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            /* Tambahkan jarak atas */
+        }
+
+        button:hover {
+            background-color: #007f9a;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .back-button {
+            background-color: #ffcc00;
+            /* Warna latar belakang tombol kembali */
+            color: #121212;
+            /* Warna teks tombol kembali */
+            margin-top: 10px;
+            /* Tambahkan jarak atas */
+        }
+
+        .back-button:hover {
+            background-color: #e6b800;
+            /* Warna saat hover tombol kembali */
+        }
+
+        .pendaftaran {
+            text-align: center;
+        }
+
+        .pendaftaran p {
+            text-align: left;
+            /* Optional: override only the paragraph about "Syarat dan Ketentuan" */
+        }
+
+        .pdf-container iframe {
+            display: block;
+            margin: 0 auto;
+            border: none;
+        }
+    </style>
+    <!-- header -->
+    <div class="medsos">
+        <div clas="container">
+            <ul>
+                <li>
+                    <a=href="#">WEBSITE PROFILE SEKOLAH</a=href=>
+                </li>
+            </ul>
         </div>
     </div>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <header>
+        <div class="container">
+            <h1><a href="index.html">PAUD JAMI ASSOFA</a></h1>
+            <ul>
+                <li class="<?php if ($active == 'beranda') {
+                                echo 'active';
+                            } ?>"><a href="<?= base_url() ?>Main_Portal">Home</a>
+                </li>
+                <li class="<?php if ($active == 'program') {
+                                echo 'active';
+                            } ?>"><a href="<?= base_url() ?>program">Program</a>
+                </li>
+                <li class="<?php if ($active == 'Gallery') {
+                                echo 'active';
+                            } ?>"><a href="<?= base_url() ?>news">Gallery</a>
+                </li>
+                <li class="<?php if ($active == 'berita') {
+                                echo 'active';
+                            } ?>"><a href="<?= base_url() ?>news">Berita</a>
+                </li>
+                <li class="<?php if ($active == 'pendaftaran') {
+                                echo 'active';
+                            } ?>"><a href="<?= base_url() ?>pendaftaran">Pendaftaran</a>
+                </li>
+                <li><a href="wa.me/62">Contact</a></li>
+                <li><a href="<?= base_url() ?>auth">Login</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--kontak-->
+    <section class="kontak">
+        <div class="container">
+            <h3>KONTAK</h3>
 
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+            <div class="box">
+                <div class="col-4">
+                    <div class="icon"><i class="fa-brands fa-instagram"></i></div>
+                    <h4>
+                        <p align="center">INSTAGRAM</p>
+                        <p align="center"> IG</p>
+                    </h4>
+                </div>
 
-    <!-- Summernote JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
 
-    <!-- CodeMirror JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+                <div class="box">
+                    <div class="col-4">
+                        <div class="icon"><i class="fa-brands fa-facebook"></i></i></div>
+                        <h4>
+                            <p align="center">FACEBOOK</p>
+                            <p align="center">FB</p>
+                        </h4>
+                    </div>
 
+                    <div class="box">
+                        <div class="col-4">
+                            <div class="icon"><i class="fa-brands fa-youtube"></i></i></div>
+                            <h4>
+                                <p align="center">YOUTUBE</p>
+                                <p align="center">YT</p>
+                            </h4>
+                        </div>
+
+
+                        <div class="box">
+                            <div class="col-4">
+                                <div class="icon"><i class="fa-brands fa-twitter"></i></i></div>
+                                <h4>
+                                    <p align="center">TWITER</p>
+                                    <p align="center">TWIT</p>
+                                </h4>
+                            </div>
+
+    </section>
+    <!-- footer -->
+    <footer>
+        <div class="container"></div>
+        <small>Copyright&copy;2025-PAUD Jami Assofa.All Rights Reserved.</small>
+    </footer>
+
+
+
+    <!-- PDF.js scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
-        $(function() {
-            // Inisialisasi Summernote
-            $('#summernote').summernote({
-                height: 200
-            });
+        // The workerSrc property needs to be specified
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-            // Inisialisasi CodeMirror jika element tersedia
-            const codeMirrorEl = document.getElementById("codeMirrorDemo");
-            if (codeMirrorEl) {
-                CodeMirror.fromTextArea(codeMirrorEl, {
-                    mode: "htmlmixed",
-                    theme: "monokai"
+        // PDF file path
+        const url = 'formulir-pendaftaran.pdf';
+
+        let pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1.0,
+            canvas = document.getElementById('pdf-canvas'),
+            ctx = canvas.getContext('2d'),
+            container = document.getElementById('pdf-container');
+
+        document.getElementById('loading').style.display = 'block';
+
+        /**
+         * Render the page
+         */
+        function renderPage(num) {
+            pageRendering = true;
+
+            // Update the current page input
+            document.getElementById('current-page').value = num;
+
+            // Get page
+            pdfDoc.getPage(num).then(function(page) {
+                const viewport = page.getViewport({
+                    scale: scale
                 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render PDF page into canvas context
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+
+                const renderTask = page.render(renderContext);
+
+                // Wait for rendering to finish
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+
+                    if (pageNumPending !== null) {
+                        // New page rendering is pending
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+        }
+
+        /**
+         * If another page rendering in progress, wait until the rendering is
+         * finished. Otherwise, execute rendering immediately.
+         */
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        /**
+         * Display previous page
+         */
+        function onPrevPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+        document.getElementById('prev-page').addEventListener('click', onPrevPage);
+
+        /**
+         * Display next page
+         */
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+        document.getElementById('next-page').addEventListener('click', onNextPage);
+
+        /**
+         * Zoom in
+         */
+        function zoomIn() {
+            scale += 0.25;
+            queueRenderPage(pageNum);
+            updateZoomDisplay();
+        }
+        document.getElementById('zoom-in').addEventListener('click', zoomIn);
+
+        /**
+         * Zoom out
+         */
+        function zoomOut() {
+            if (scale <= 0.25) return;
+            scale -= 0.25;
+            queueRenderPage(pageNum);
+            updateZoomDisplay();
+        }
+        document.getElementById('zoom-out').addEventListener('click', zoomOut);
+
+        /**
+         * Update zoom percentage display
+         */
+        function updateZoomDisplay() {
+            document.querySelector('.zoom-value').textContent = Math.round(scale * 100) + '%';
+        }
+
+        /**
+         * Handle page input
+         */
+        document.getElementById('current-page').addEventListener('change', function() {
+            const pageNumber = parseInt(this.value);
+
+            if (pageNumber >= 1 && pageNumber <= pdfDoc.numPages) {
+                pageNum = pageNumber;
+                queueRenderPage(pageNum);
+            } else {
+                this.value = pageNum;
             }
         });
+
+        /**
+         * Download PDF
+         */
+        document.getElementById('download-pdf').addEventListener('click', function() {
+            // Create a temporary link
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = url.split('/').pop();
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        /**
+         * Print PDF
+         */
+        document.getElementById('print-pdf').addEventListener('click', function() {
+            const printWindow = window.open(url);
+            printWindow.addEventListener('load', function() {
+                printWindow.print();
+            });
+        });
+
+        /**
+         * Toggle fullscreen
+         */
+        document.getElementById('fullscreen').addEventListener('click', function() {
+            if (!document.fullscreenElement) {
+                document
+                    .querySelector('.pdf-viewer-container')
+                    .requestFullscreen()
+                    .catch((err) => {
+                        console.error(
+                            `Error attempting to enable full-screen mode: ${err.message}`
+                        );
+                    });
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        /**
+         * Toggle sidebar (placeholder functionality)
+         */
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+            alert('Sidebar functionality would be implemented here.');
+        });
+
+        /**
+         * Load the PDF
+         */
+        pdfjsLib
+            .getDocument(url)
+            .promise.then(function(pdfDoc_) {
+                pdfDoc = pdfDoc_;
+                document.getElementById('total-pages').textContent = pdfDoc.numPages;
+                document.getElementById('loading').style.display = 'none';
+
+                // Initial render of the first page
+                renderPage(pageNum);
+            })
+            .catch(function(error) {
+                // Display error
+                const loadingDiv = document.getElementById('loading');
+                loadingDiv.textContent = 'Error loading PDF: ' + error.message;
+                loadingDiv.style.display = 'block';
+                console.error(error);
+            });
     </script>
+
 </body>
 
 </html>
