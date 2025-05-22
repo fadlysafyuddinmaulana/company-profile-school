@@ -7,10 +7,19 @@ class M_SQL extends CI_Model
 	public function data_berita()
 	{
 		$q = $this->db->query("select * from tb_berita");
-		// $q = $this->db->query("select * from tb_berita order by id_berita desc limit 10");
 		return $q;
 	}
 
+	public function data_gallery()
+	{
+		$q = $this->db->query("select * from tb_foto");
+		return $q;
+	}
+	public function data_gallery_limit()
+	{
+		$q = $this->db->query("select * from tb_foto order by id_foto desc limit 10");
+		return $q;
+	}
 	/* get data*/
 
 	public function stok_status($stok)

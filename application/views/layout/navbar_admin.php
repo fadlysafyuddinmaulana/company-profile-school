@@ -14,10 +14,18 @@
   		<ul>
   			<li class="<?php if ($active == 'berita') {
 								echo 'active';
-							} ?>"><a style="color: black;" href="<?= base_url() ?>Berita">Berita</a></li>
+							} ?>"><a style="color: <?php if ($active == 'berita') {
+														echo 'white';
+													} else {
+														echo 'black';
+													} ?>;" href="<?= base_url() ?>data-berita">Berita</a></li>
   			<li class="<?php if ($active == 'galeri') {
 								echo 'active';
-							} ?>><a style=" color: black;" href="<?= base_url() ?>Berita">Galeri</a></li>
+							} ?>"><a style=" color: <?php if ($active == 'galeri') {
+														echo 'white';
+													} else {
+														echo 'black';
+													} ?>;" href="<?= base_url() ?>add-gallery">Galeri</a></li>
   			<li><a style=" color: black;" href="<?= base_url() ?>logout">Logout</a></li>
   		</ul>
   	</div>

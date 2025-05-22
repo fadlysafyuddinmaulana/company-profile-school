@@ -45,21 +45,6 @@ class Berita extends CI_Controller
 		$this->load->view('layout/footer_login', $data);
 	}
 
-	public function detail_berita($idptgs)
-	{
-		$data['title'] = 'PAUD JAMI ASSOFA';
-		$data['active'] = 'petugas';
-
-		$where = ['id_berita' => $idptgs];
-
-		$data['petugas'] = $this->M_SQL->get_data($where, 'tb_berita')->row();
-
-		$this->load->view('layout/header', $data);
-		$this->load->view('layout/navbar', $data);
-		$this->load->view('Petugas-Page/detail_petugas', $data);
-		$this->load->view('layout/footer', $data);
-	}
-
 	public function insert_berita()
 	{
 		$judul_berita = $this->input->post('judul_berita');

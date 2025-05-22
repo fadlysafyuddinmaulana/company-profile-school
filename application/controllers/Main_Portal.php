@@ -7,6 +7,8 @@ class Main_Portal extends CI_Controller
 		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'beranda';
 
+		$data['foto'] = $this->M_SQL->data_gallery_limit()->result_array();
+
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/navbar', $data);
 		$this->load->view('Main-Page/index', $data);
@@ -47,14 +49,30 @@ class Main_Portal extends CI_Controller
 		$this->load->view('layout/footer', $data);
 	}
 
-	public function content_news()
+	public function content_news($idb)
 	{
 		$data['title'] = 'PAUD JAMI ASSOFA';
 		$data['active'] = 'berita';
 
+		$where = array('id_berita' => $idb);
+
+		$data['berita'] = $this->M_SQL->get_data($where, 'tb_berita')->row();
+
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/navbar', $data);
 		$this->load->view('Main-Page/content-news', $data);
+		$this->load->view('layout/footer', $data);
+	}
+
+	public function gallery()
+	{
+		$data['title'] = 'PAUD JAMI ASSOFA';
+		$data['active'] = 'Gallery';
+		$data['foto'] = $this->M_SQL->data_gallery()->result_array();
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('layout/navbar', $data);
+		$this->load->view('Main-Page/gallery', $data);
 		$this->load->view('layout/footer', $data);
 	}
 }

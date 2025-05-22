@@ -2,86 +2,17 @@
      <p align="center">Galeri Foto</p>
  </h3>
  <div class="bg-card">
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
+     <?php foreach ($foto as $key => $value): ?>
+         <a href="#">
+             <div class="card">
+                 <div class="gambar">
+                     <img src="<?= base_url() ?>assets/img/gallery/<?= $value['file_image'] ?>">
+                 </div>
+                 <div class="des-card">
+                     <h4><strong><?= $value['judul_foto'] ?></strong></h4>
+                     <p align="left">Deskripsi</p>
+                 </div>
              </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-                 <img src="img\pemadam.jpeg">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-                 <img src="img\cook.jpeg">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
-     <a href="#">
-         <div class="card">
-             <div class="gambar">
-             </div>
-             <div class="des-card">
-                 <h4><strong>Memasak Bersama</strong></h4>
-                 <p align="left">Deskripsi</p>
-             </div>
-         </div>
-     </a>
+         </a>
+     <?php endforeach; ?>
  </div>

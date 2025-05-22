@@ -18,7 +18,7 @@
                   <?= word_limiter($value['isi_berita'], 50) ?>
                 </div>
               </div>
-              <a href="<?= base_url() ?>berita/detail_berita/<?= $value['judul'] ?>" class="news-card-link">Selengkapnya</a>
+              <a href="<?= base_url() ?>content-news/<?= $value['id_berita'] ?>" class="news-card-link">Selengkapnya</a>
             </div>
           </div>
         <?php endforeach; ?>

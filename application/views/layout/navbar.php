@@ -22,7 +22,7 @@
   			</li>
   			<li class="<?php if ($active == 'Gallery') {
 								echo 'active';
-							} ?>"><a href="<?= base_url() ?>news">Gallery</a>
+							} ?>"><a href="<?= base_url() ?>gallery">Gallery</a>
   			</li>
   			<li class="<?php if ($active == 'berita') {
 								echo 'active';

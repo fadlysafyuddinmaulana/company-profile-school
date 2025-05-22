@@ -49,23 +49,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Main_Portal';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = false;
+$route['default_controller']    = 'Main_Portal';
+$route['404_override']          = '';
+$route['translate_uri_dashes']  = false;
 
-$route['program'] = 'Main_Portal/program';
-$route['pendaftaran'] = 'Main_Portal/form_student';
+$route['program']               = 'Main_Portal/program';
+$route['pendaftaran']           = 'Main_Portal/form_student';
+$route['gallery']               = 'Main_Portal/gallery';
+$route['news']                  = 'Main_Portal/news';
+$route['content-news/(:any)']   = 'Main_Portal/content_news/$1';
 
-$route['news'] = 'Main_Portal/news';
-$route['add-news'] = 'Berita/add_Content_Page';
-$route['insert-news'] = 'Berita/insert_berita';
-$route['update-news/(:any)'] = 'Berita/update_berita/$1';
-$route['edit-news/(:any)'] = 'Berita/edit_news/$1';
-$route['delete-news/(:any)'] = 'Berita/del_news/$1';
+$route['data-berita']           = 'Dashboard/index';
+$route['add-news']              = 'Berita/add_Content_Page';
+$route['insert-news']           = 'Berita/insert_berita';
+$route['update-news/(:any)']    = 'Berita/update_berita/$1';
+$route['edit-news/(:any)']      = 'Berita/edit_news/$1';
+$route['delete-news/(:any)']    = 'Berita/del_news/$1';
 
-$route['Gallery'] = 'Main_Portal/Foto';
-$route['add-Gallery'] = 'Gallery/add_Galerry';
-$route['edit-Gallery/(:any)'] = 'Gallery/edit_Galerry/$1';
-$route['delete-Gallery/(:any)'] = 'Gallery/del_Galerry/$1';
+$route['data-gallery']          = 'Dashboard/data_gallery';
+$route['add-gallery']           = 'Gallery/add_gallery';
+$route['insert-gallery']        = 'Gallery/insert_gallery';
+$route['update-gallery/(:any)']    = 'Gallery/update_gallery/$1';
+$route['edit-gallery/(:any)']   = 'Gallery/edit_gallery/$1';
+$route['delete-gallery/(:any)'] = 'Gallery/del_gallery/$1';
 
-$route['authentication_admin'] = 'auth/authentication_admin';
+$route['authentication_admin']  = 'auth/authentication_admin';

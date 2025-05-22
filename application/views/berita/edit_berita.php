@@ -1,9 +1,9 @@
 <div class="main-content">
     <div class="container-a">
         <form action="<?= base_url() ?>update-news/<?= $berita->id_berita ?>" method="post" enctype="multipart/form-data">
-            <h1>Login Admin</h1>
+            <h1>Form Edit Berita</h1>
             <div id="login" class="tab-content active">
-                <p class="description">Masukan Nomor Pasien dan Tanggal Lahir</p>
+                <p class="description">Form Edit Berita</p>
                 <div class="form-group">
                     <label>Judul Berita <span class="required">*</span></label>
                     <input type="hidden" placeholder="Masukkan Nomor Pasien" name="id_berita" id="id_berita" value="<?= $berita->id_berita ?>" required>
